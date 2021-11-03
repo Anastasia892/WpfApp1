@@ -38,7 +38,6 @@
                 <DataGridTextColumn x:Name="Fam" Header="Фамилия" Binding="{Binding Path = Фамилия }"/>
                 <DataGridTextColumn x:Name="Im" Header="Имя" Binding="{Binding Path = Имя}"/>
                 <DataGridTextColumn x:Name="Otch" Header="Отчество" Binding="{Binding Path = Отчество}"/>
-                <DataGridTextColumn x:Name="Gender" Header="Пол" Binding="{Binding Path = Пол}"/>
                 <DataGridTextColumn x:Name="Data" Header="Дата" Binding="{Binding Path = Дата}"/>
                 <DataGridTextColumn x:Name="Uchet" Header="Учет" Binding="{Binding Path = Учет}"/>
                 <DataGridTextColumn x:Name="FIO_VR" Header="ФИО_Врач" Binding="{Binding Path = ФИО_Врачь}"/>

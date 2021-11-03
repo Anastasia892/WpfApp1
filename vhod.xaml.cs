@@ -41,12 +41,12 @@ namespace WpfApp1
             {
                 if (User.IDроли == 1)
                 {
-                    MessageBox.Show("Добро пожаловать на борт, капитан " + User.Имя + "!", "Авторизация");
+                    MessageBox.Show("Добро пожаловать АДМИН " + User.Имя , "Авторизация");
                     Frame2.Frame.Navigate(new Admin());
                 }
                 else
                 {
-                    MessageBox.Show("Здравствуйте, " + User.Имя + "!", "Авторизация");
+                    MessageBox.Show("Здравствуйте, " + User.Имя , "Авторизация");
                     Frame2.Frame.Navigate(new vhod_itog());
                 }
             }

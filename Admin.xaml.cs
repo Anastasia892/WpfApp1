@@ -23,6 +23,7 @@ namespace WpfApp1
         public Admin()
         {
             InitializeComponent();
+            dg.ItemsSource = ObchClass.base1.Пользователи.ToList();
         }
 
         private void spisok_Click(object sender, RoutedEventArgs e)
