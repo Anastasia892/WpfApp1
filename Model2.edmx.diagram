@@ -4,10 +4,20 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="552beb0c18e048028c4da15eabeefd1c" Name="Diagram1">
-        <EntityTypeShape EntityType="Model.Пользователи" Width="1.5" PointX="3" PointY="1" IsExpanded="true" />
-        <EntityTypeShape EntityType="Model.Роли" Width="1.5" PointX="0.75" PointY="1.375" IsExpanded="true" />
-        <AssociationConnector Association="Model.FK_Пользователи_Роли" ManuallyRouted="false" />
+      <Diagram DiagramId="552beb0c18e048028c4da15eabeefd1c" Name="Diagram1" ZoomLevel="83">
+        <EntityTypeShape EntityType="Model.Бренд" Width="1.5" PointX="0.75" PointY="3.875" />
+        <EntityTypeShape EntityType="Model.Информация_о_косметике" Width="1.5" PointX="6" PointY="3.5" />
+        <EntityTypeShape EntityType="Model.Класификация" Width="1.5" PointX="3" PointY="3.875" />
+        <EntityTypeShape EntityType="Model.Пользователи" Width="1.5" PointX="8" PointY="7.875" />
+        <EntityTypeShape EntityType="Model.Роли" Width="1.5" PointX="5.75" PointY="8.25" />
+        <EntityTypeShape EntityType="Model.Страна" Width="1.5" PointX="3.75" PointY="0.75" />
+        <EntityTypeShape EntityType="Model.Тип_косметики" Width="1.5" PointX="3.75" PointY="7.125" />
+        <AssociationConnector Association="Model.FK_Информация_о_косметике_Бренд" />
+        <AssociationConnector Association="Model.FK_Класификация_Бренд" />
+        <AssociationConnector Association="Model.FK_Информация_о_косметике_Страна" />
+        <AssociationConnector Association="Model.FK_Информация_о_косметике_Тип_косметики" />
+        <AssociationConnector Association="Model.FK_Класификация_Тип_косметики" />
+        <AssociationConnector Association="Model.FK_Пользователи_Роли" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

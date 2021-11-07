@@ -71,6 +71,9 @@
     <Compile Include="Class1.cs" />
     <Compile Include="Frame2.cs" />
     <Compile Include="Karta.cs" />
+    <Compile Include="Klassif.xaml.cs">
+      <DependentUpon>Klassif.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Model2.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -93,11 +96,27 @@
     <Compile Include="reg.xaml.cs">
       <DependentUpon>reg.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Str.xaml.cs">
+      <DependentUpon>Str.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Str2.xaml.cs">
+      <DependentUpon>Str2.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Svoi.cs" />
     <Compile Include="vhod.xaml.cs">
       <DependentUpon>vhod.xaml</DependentUpon>
     </Compile>
     <Compile Include="vhod_itog.xaml.cs">
       <DependentUpon>vhod_itog.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Бренд.cs">
+      <DependentUpon>Model2.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Информация_о_косметике.cs">
+      <DependentUpon>Model2.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Класификация.cs">
+      <DependentUpon>Model2.tt</DependentUpon>
     </Compile>
     <Compile Include="Пользователи.cs">
       <DependentUpon>Model2.tt</DependentUpon>
@@ -105,7 +124,17 @@
     <Compile Include="Роли.cs">
       <DependentUpon>Model2.tt</DependentUpon>
     </Compile>
+    <Compile Include="Страна.cs">
+      <DependentUpon>Model2.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Тип_косметики.cs">
+      <DependentUpon>Model2.tt</DependentUpon>
+    </Compile>
     <Page Include="Admin.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Klassif.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -126,6 +155,14 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="reg.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Str.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Str2.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

@@ -5,6 +5,33 @@
     <!-- SSDL content -->
     <edmx:StorageModels>
     <Schema Namespace="Хранилище Model" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Бренд">
+          <Key>
+            <PropertyRef Name="ID_Бренд" />
+          </Key>
+          <Property Name="ID_Бренд" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Страна_изготовления" Type="int" />
+          <Property Name="Имя_бренда" Type="nchar" MaxLength="20" />
+        </EntityType>
+        <EntityType Name="Информация_о_косметике">
+          <Key>
+            <PropertyRef Name="ID_Косметики" />
+          </Key>
+          <Property Name="ID_Косметики" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Бренд" Type="int" />
+          <Property Name="Страна_изготовления" Type="int" />
+          <Property Name="Дата_изготовления" Type="date" Nullable="false" />
+          <Property Name="Фото" Type="nchar" MaxLength="20" />
+          <Property Name="ID_Тип_косметики" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Класификация">
+          <Key>
+            <PropertyRef Name="ID_Записи" />
+          </Key>
+          <Property Name="ID_Записи" Type="int" Nullable="false" />
+          <Property Name="ID_Бренда" Type="int" Nullable="false" />
+          <Property Name="ID_Тип_косметики" Type="int" Nullable="false" />
+        </EntityType>
         <EntityType Name="Пользователи">
           <Key>
             <PropertyRef Name="ID" />
@@ -23,6 +50,80 @@
           <Property Name="IDроли" Type="int" Nullable="false" />
           <Property Name="Роль" Type="nchar" MaxLength="10" Nullable="false" />
         </EntityType>
+        <EntityType Name="Страна">
+          <Key>
+            <PropertyRef Name="ID_Страны" />
+          </Key>
+          <Property Name="ID_Страны" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Страна_изготовления" Type="varchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="Тип_косметики">
+          <Key>
+            <PropertyRef Name="ID_Тип_косметики" />
+          </Key>
+          <Property Name="ID_Тип_косметики" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Тип_косметики" Type="varchar" MaxLength="50" />
+        </EntityType>
+        <Association Name="FK_Информация_о_косметике_Бренд">
+          <End Role="Бренд" Type="Self.Бренд" Multiplicity="0..1" />
+          <End Role="Информация_о_косметике" Type="Self.Информация_о_косметике" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Бренд">
+              <PropertyRef Name="ID_Бренд" />
+            </Principal>
+            <Dependent Role="Информация_о_косметике">
+              <PropertyRef Name="Бренд" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Информация_о_косметике_Страна">
+          <End Role="Страна" Type="Self.Страна" Multiplicity="0..1" />
+          <End Role="Информация_о_косметике" Type="Self.Информация_о_косметике" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Страна">
+              <PropertyRef Name="ID_Страны" />
+            </Principal>
+            <Dependent Role="Информация_о_косметике">
+              <PropertyRef Name="Страна_изготовления" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Информация_о_косметике_Тип_косметики">
+          <End Role="Тип_косметики" Type="Self.Тип_косметики" Multiplicity="1" />
+          <End Role="Информация_о_косметике" Type="Self.Информация_о_косметике" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Тип_косметики">
+              <PropertyRef Name="ID_Тип_косметики" />
+            </Principal>
+            <Dependent Role="Информация_о_косметике">
+              <PropertyRef Name="ID_Тип_косметики" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Класификация_Бренд">
+          <End Role="Бренд" Type="Self.Бренд" Multiplicity="1" />
+          <End Role="Класификация" Type="Self.Класификация" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Бренд">
+              <PropertyRef Name="ID_Бренд" />
+            </Principal>
+            <Dependent Role="Класификация">
+              <PropertyRef Name="ID_Бренда" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Класификация_Тип_косметики">
+          <End Role="Тип_косметики" Type="Self.Тип_косметики" Multiplicity="1" />
+          <End Role="Класификация" Type="Self.Класификация" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Тип_косметики">
+              <PropertyRef Name="ID_Тип_косметики" />
+            </Principal>
+            <Dependent Role="Класификация">
+              <PropertyRef Name="ID_Тип_косметики" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_Пользователи_Роли">
           <End Role="Роли" Type="Self.Роли" Multiplicity="1" />
           <End Role="Пользователи" Type="Self.Пользователи" Multiplicity="*" />
@@ -36,8 +137,33 @@
           </ReferentialConstraint>
         </Association>
         <EntityContainer Name="Хранилище ModelContainer">
+          <EntitySet Name="Бренд" EntityType="Self.Бренд" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Информация_о_косметике" EntityType="Self.Информация_о_косметике" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Класификация" EntityType="Self.Класификация" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Пользователи" EntityType="Self.Пользователи" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Роли" EntityType="Self.Роли" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Страна" EntityType="Self.Страна" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Тип_косметики" EntityType="Self.Тип_косметики" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_Информация_о_косметике_Бренд" Association="Self.FK_Информация_о_косметике_Бренд">
+            <End Role="Бренд" EntitySet="Бренд" />
+            <End Role="Информация_о_косметике" EntitySet="Информация_о_косметике" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Информация_о_косметике_Страна" Association="Self.FK_Информация_о_косметике_Страна">
+            <End Role="Страна" EntitySet="Страна" />
+            <End Role="Информация_о_косметике" EntitySet="Информация_о_косметике" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Информация_о_косметике_Тип_косметики" Association="Self.FK_Информация_о_косметике_Тип_косметики">
+            <End Role="Тип_косметики" EntitySet="Тип_косметики" />
+            <End Role="Информация_о_косметике" EntitySet="Информация_о_косметике" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Класификация_Бренд" Association="Self.FK_Класификация_Бренд">
+            <End Role="Бренд" EntitySet="Бренд" />
+            <End Role="Класификация" EntitySet="Класификация" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Класификация_Тип_косметики" Association="Self.FK_Класификация_Тип_косметики">
+            <End Role="Тип_косметики" EntitySet="Тип_косметики" />
+            <End Role="Класификация" EntitySet="Класификация" />
+          </AssociationSet>
           <AssociationSet Name="FK_Пользователи_Роли" Association="Self.FK_Пользователи_Роли">
             <End Role="Роли" EntitySet="Роли" />
             <End Role="Пользователи" EntitySet="Пользователи" />
@@ -47,29 +173,173 @@
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="Model" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityContainer Name="BDpop" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Бренд" EntityType="Model.Бренд" />
+          <EntitySet Name="Информация_о_косметике" EntityType="Model.Информация_о_косметике" />
+          <EntitySet Name="Класификация" EntityType="Model.Класификация" />
+          <EntitySet Name="Пользователи" EntityType="Model.Пользователи" />
+          <EntitySet Name="Роли" EntityType="Model.Роли" />
+          <EntitySet Name="Страна" EntityType="Model.Страна" />
+          <EntitySet Name="Тип_косметики" EntityType="Model.Тип_косметики" />
+          <AssociationSet Name="FK_Информация_о_косметике_Бренд" Association="Model.FK_Информация_о_косметике_Бренд">
+            <End Role="Бренд" EntitySet="Бренд" />
+            <End Role="Информация_о_косметике" EntitySet="Информация_о_косметике" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Класификация_Бренд" Association="Model.FK_Класификация_Бренд">
+            <End Role="Бренд" EntitySet="Бренд" />
+            <End Role="Класификация" EntitySet="Класификация" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Информация_о_косметике_Страна" Association="Model.FK_Информация_о_косметике_Страна">
+            <End Role="Страна" EntitySet="Страна" />
+            <End Role="Информация_о_косметике" EntitySet="Информация_о_косметике" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Информация_о_косметике_Тип_косметики" Association="Model.FK_Информация_о_косметике_Тип_косметики">
+            <End Role="Тип_косметики" EntitySet="Тип_косметики" />
+            <End Role="Информация_о_косметике" EntitySet="Информация_о_косметике" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Класификация_Тип_косметики" Association="Model.FK_Класификация_Тип_косметики">
+            <End Role="Тип_косметики" EntitySet="Тип_косметики" />
+            <End Role="Класификация" EntitySet="Класификация" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Пользователи_Роли" Association="Model.FK_Пользователи_Роли">
+            <End Role="Роли" EntitySet="Роли" />
+            <End Role="Пользователи" EntitySet="Пользователи" />
+          </AssociationSet>
+        </EntityContainer>
+        <EntityType Name="Бренд">
+          <Key>
+            <PropertyRef Name="ID_Бренд" />
+          </Key>
+          <Property Name="ID_Бренд" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Страна_изготовления" Type="Int32" />
+          <Property Name="Имя_бренда" Type="String" MaxLength="20" FixedLength="true" Unicode="true" />
+          <NavigationProperty Name="Информация_о_косметике" Relationship="Model.FK_Информация_о_косметике_Бренд" FromRole="Бренд" ToRole="Информация_о_косметике" />
+          <NavigationProperty Name="Класификация" Relationship="Model.FK_Класификация_Бренд" FromRole="Бренд" ToRole="Класификация" />
+        </EntityType>
+        <EntityType Name="Информация_о_косметике">
+          <Key>
+            <PropertyRef Name="ID_Косметики" />
+          </Key>
+          <Property Name="ID_Косметики" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Бренд" Type="Int32" />
+          <Property Name="Страна_изготовления" Type="Int32" />
+          <Property Name="Дата_изготовления" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="Фото" Type="String" MaxLength="20" FixedLength="true" Unicode="true" />
+          <Property Name="ID_Тип_косметики" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Бренд1" Relationship="Model.FK_Информация_о_косметике_Бренд" FromRole="Информация_о_косметике" ToRole="Бренд" />
+          <NavigationProperty Name="Страна" Relationship="Model.FK_Информация_о_косметике_Страна" FromRole="Информация_о_косметике" ToRole="Страна" />
+          <NavigationProperty Name="Тип_косметики" Relationship="Model.FK_Информация_о_косметике_Тип_косметики" FromRole="Информация_о_косметике" ToRole="Тип_косметики" />
+        </EntityType>
+        <EntityType Name="Класификация">
+          <Key>
+            <PropertyRef Name="ID_Записи" />
+          </Key>
+          <Property Name="ID_Записи" Type="Int32" Nullable="false" />
+          <Property Name="ID_Бренда" Type="Int32" Nullable="false" />
+          <Property Name="ID_Тип_косметики" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Бренд" Relationship="Model.FK_Класификация_Бренд" FromRole="Класификация" ToRole="Бренд" />
+          <NavigationProperty Name="Тип_косметики" Relationship="Model.FK_Класификация_Тип_косметики" FromRole="Класификация" ToRole="Тип_косметики" />
+        </EntityType>
         <EntityType Name="Пользователи">
           <Key>
             <PropertyRef Name="ID" />
           </Key>
           <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Имя" Type="String" MaxLength="10" FixedLength="true" Unicode="true" Nullable="false" />
-          <Property Name="Фамилия" Type="String" MaxLength="10" FixedLength="true" Unicode="true" Nullable="false" />
-          <Property Name="Логин" Type="String" MaxLength="10" FixedLength="true" Unicode="true" Nullable="false" />
+          <Property Name="Имя" Type="String" Nullable="false" MaxLength="10" FixedLength="true" Unicode="true" />
+          <Property Name="Фамилия" Type="String" Nullable="false" MaxLength="10" FixedLength="true" Unicode="true" />
+          <Property Name="Логин" Type="String" Nullable="false" MaxLength="10" FixedLength="true" Unicode="true" />
           <Property Name="Пароль" Type="Int32" Nullable="false" />
           <Property Name="IDроли" Type="Int32" Nullable="false" />
-          <NavigationProperty Name="Роли" Relationship="Self.FK_Пользователи_Роли" FromRole="Пользователи" ToRole="Роли" />
+          <NavigationProperty Name="Роли" Relationship="Model.FK_Пользователи_Роли" FromRole="Пользователи" ToRole="Роли" />
         </EntityType>
         <EntityType Name="Роли">
           <Key>
             <PropertyRef Name="IDроли" />
           </Key>
           <Property Name="IDроли" Type="Int32" Nullable="false" />
-          <Property Name="Роль" Type="String" MaxLength="10" FixedLength="true" Unicode="true" Nullable="false" />
-          <NavigationProperty Name="Пользователи" Relationship="Self.FK_Пользователи_Роли" FromRole="Роли" ToRole="Пользователи" />
+          <Property Name="Роль" Type="String" Nullable="false" MaxLength="10" FixedLength="true" Unicode="true" />
+          <NavigationProperty Name="Пользователи" Relationship="Model.FK_Пользователи_Роли" FromRole="Роли" ToRole="Пользователи" />
         </EntityType>
+        <EntityType Name="Страна">
+          <Key>
+            <PropertyRef Name="ID_Страны" />
+          </Key>
+          <Property Name="ID_Страны" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Страна_изготовления" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Информация_о_косметике" Relationship="Model.FK_Информация_о_косметике_Страна" FromRole="Страна" ToRole="Информация_о_косметике" />
+        </EntityType>
+        <EntityType Name="Тип_косметики">
+          <Key>
+            <PropertyRef Name="ID_Тип_косметики" />
+          </Key>
+          <Property Name="ID_Тип_косметики" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Тип_косметики1" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Информация_о_косметике" Relationship="Model.FK_Информация_о_косметике_Тип_косметики" FromRole="Тип_косметики" ToRole="Информация_о_косметике" />
+          <NavigationProperty Name="Класификация" Relationship="Model.FK_Класификация_Тип_косметики" FromRole="Тип_косметики" ToRole="Класификация" />
+        </EntityType>
+        <Association Name="FK_Информация_о_косметике_Бренд">
+          <End Type="Model.Бренд" Role="Бренд" Multiplicity="0..1" />
+          <End Type="Model.Информация_о_косметике" Role="Информация_о_косметике" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Бренд">
+              <PropertyRef Name="ID_Бренд" />
+            </Principal>
+            <Dependent Role="Информация_о_косметике">
+              <PropertyRef Name="Бренд" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Класификация_Бренд">
+          <End Type="Model.Бренд" Role="Бренд" Multiplicity="1" />
+          <End Type="Model.Класификация" Role="Класификация" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Бренд">
+              <PropertyRef Name="ID_Бренд" />
+            </Principal>
+            <Dependent Role="Класификация">
+              <PropertyRef Name="ID_Бренда" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Информация_о_косметике_Страна">
+          <End Type="Model.Страна" Role="Страна" Multiplicity="0..1" />
+          <End Type="Model.Информация_о_косметике" Role="Информация_о_косметике" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Страна">
+              <PropertyRef Name="ID_Страны" />
+            </Principal>
+            <Dependent Role="Информация_о_косметике">
+              <PropertyRef Name="Страна_изготовления" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Информация_о_косметике_Тип_косметики">
+          <End Type="Model.Тип_косметики" Role="Тип_косметики" Multiplicity="1" />
+          <End Type="Model.Информация_о_косметике" Role="Информация_о_косметике" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Тип_косметики">
+              <PropertyRef Name="ID_Тип_косметики" />
+            </Principal>
+            <Dependent Role="Информация_о_косметике">
+              <PropertyRef Name="ID_Тип_косметики" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Класификация_Тип_косметики">
+          <End Type="Model.Тип_косметики" Role="Тип_косметики" Multiplicity="1" />
+          <End Type="Model.Класификация" Role="Класификация" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Тип_косметики">
+              <PropertyRef Name="ID_Тип_косметики" />
+            </Principal>
+            <Dependent Role="Класификация">
+              <PropertyRef Name="ID_Тип_косметики" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_Пользователи_Роли">
-          <End Role="Роли" Type="Self.Роли" Multiplicity="1" />
-          <End Role="Пользователи" Type="Self.Пользователи" Multiplicity="*" />
+          <End Type="Model.Роли" Role="Роли" Multiplicity="1" />
+          <End Type="Model.Пользователи" Role="Пользователи" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Роли">
               <PropertyRef Name="IDроли" />
@@ -79,37 +349,75 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <EntityContainer Name="BDpop" annotation:LazyLoadingEnabled="true">
-          <EntitySet Name="Пользователи" EntityType="Self.Пользователи" />
-          <EntitySet Name="Роли" EntityType="Self.Роли" />
-          <AssociationSet Name="FK_Пользователи_Роли" Association="Self.FK_Пользователи_Роли">
-            <End Role="Роли" EntitySet="Роли" />
-            <End Role="Пользователи" EntitySet="Пользователи" />
-          </AssociationSet>
-        </EntityContainer>
-      </Schema>
+        </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
         <EntityContainerMapping StorageEntityContainer="Хранилище ModelContainer" CdmEntityContainer="BDpop">
+          <EntitySetMapping Name="Бренд">
+            <EntityTypeMapping TypeName="Model.Бренд">
+              <MappingFragment StoreEntitySet="Бренд">
+                <ScalarProperty Name="Имя_бренда" ColumnName="Имя_бренда" />
+                <ScalarProperty Name="Страна_изготовления" ColumnName="Страна_изготовления" />
+                <ScalarProperty Name="ID_Бренд" ColumnName="ID_Бренд" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Информация_о_косметике">
+            <EntityTypeMapping TypeName="Model.Информация_о_косметике">
+              <MappingFragment StoreEntitySet="Информация_о_косметике">
+                <ScalarProperty Name="ID_Тип_косметики" ColumnName="ID_Тип_косметики" />
+                <ScalarProperty Name="Фото" ColumnName="Фото" />
+                <ScalarProperty Name="Дата_изготовления" ColumnName="Дата_изготовления" />
+                <ScalarProperty Name="Страна_изготовления" ColumnName="Страна_изготовления" />
+                <ScalarProperty Name="Бренд" ColumnName="Бренд" />
+                <ScalarProperty Name="ID_Косметики" ColumnName="ID_Косметики" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Класификация">
+            <EntityTypeMapping TypeName="Model.Класификация">
+              <MappingFragment StoreEntitySet="Класификация">
+                <ScalarProperty Name="ID_Тип_косметики" ColumnName="ID_Тип_косметики" />
+                <ScalarProperty Name="ID_Бренда" ColumnName="ID_Бренда" />
+                <ScalarProperty Name="ID_Записи" ColumnName="ID_Записи" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
           <EntitySetMapping Name="Пользователи">
             <EntityTypeMapping TypeName="Model.Пользователи">
               <MappingFragment StoreEntitySet="Пользователи">
-                <ScalarProperty Name="ID" ColumnName="ID" />
-                <ScalarProperty Name="Имя" ColumnName="Имя" />
-                <ScalarProperty Name="Фамилия" ColumnName="Фамилия" />
-                <ScalarProperty Name="Логин" ColumnName="Логин" />
-                <ScalarProperty Name="Пароль" ColumnName="Пароль" />
                 <ScalarProperty Name="IDроли" ColumnName="IDроли" />
+                <ScalarProperty Name="Пароль" ColumnName="Пароль" />
+                <ScalarProperty Name="Логин" ColumnName="Логин" />
+                <ScalarProperty Name="Фамилия" ColumnName="Фамилия" />
+                <ScalarProperty Name="Имя" ColumnName="Имя" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Роли">
             <EntityTypeMapping TypeName="Model.Роли">
               <MappingFragment StoreEntitySet="Роли">
-                <ScalarProperty Name="IDроли" ColumnName="IDроли" />
                 <ScalarProperty Name="Роль" ColumnName="Роль" />
+                <ScalarProperty Name="IDроли" ColumnName="IDроли" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Страна">
+            <EntityTypeMapping TypeName="Model.Страна">
+              <MappingFragment StoreEntitySet="Страна">
+                <ScalarProperty Name="Страна_изготовления" ColumnName="Страна_изготовления" />
+                <ScalarProperty Name="ID_Страны" ColumnName="ID_Страны" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Тип_косметики">
+            <EntityTypeMapping TypeName="Model.Тип_косметики">
+              <MappingFragment StoreEntitySet="Тип_косметики">
+                <ScalarProperty Name="Тип_косметики1" ColumnName="Тип_косметики" />
+                <ScalarProperty Name="ID_Тип_косметики" ColumnName="ID_Тип_косметики" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

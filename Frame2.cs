@@ -10,6 +10,7 @@ namespace WpfApp1
     class Frame2
     {
         public static Frame Frame;
-
+        public static Frame Frame3;
     }
+
 }

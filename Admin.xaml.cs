@@ -1,17 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows;
+﻿using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 
 namespace WpfApp1
 {
@@ -23,18 +11,27 @@ namespace WpfApp1
         public Admin()
         {
             InitializeComponent();
-            dg.ItemsSource = ObchClass.base1.Пользователи.ToList();
+            Frame2.Frame3 = fr_katalog;
         }
 
         private void spisok_Click(object sender, RoutedEventArgs e)
         {
-            st1.Visibility = Visibility.Visible;
-            st2.Visibility = Visibility.Collapsed;
+            Frame2.Frame3.Navigate(new Str());
         }
 
         private void glaviek_Click(object sender, RoutedEventArgs e)
         {
             Frame2.Frame.Navigate(new nachalo());
+        }
+
+        private void kosmet_Click(object sender, RoutedEventArgs e)
+        {
+            Frame2.Frame3.Navigate(new Str2());
+        }
+
+        private void klas_Click(object sender, RoutedEventArgs e)
+        {
+            Frame2.Frame3.Navigate(new Klassif());
         }
     }
 }

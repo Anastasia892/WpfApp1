@@ -25,7 +25,12 @@ namespace WpfApp1
             throw new UnintentionalCodeFirstException();
         }
     
+        public virtual DbSet<Бренд> Бренд { get; set; }
+        public virtual DbSet<Информация_о_косметике> Информация_о_косметике { get; set; }
+        public virtual DbSet<Класификация> Класификация { get; set; }
         public virtual DbSet<Пользователи> Пользователи { get; set; }
         public virtual DbSet<Роли> Роли { get; set; }
+        public virtual DbSet<Страна> Страна { get; set; }
+        public virtual DbSet<Тип_косметики> Тип_косметики { get; set; }
     }
 }
