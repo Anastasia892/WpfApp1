@@ -22,7 +22,7 @@ namespace WpfApp1
         {
             get
             {
-                return "Бренд : " + Бренд1;
+                return "Бренд : " + Бренд1.Имя_бренда;
 
             }
         }

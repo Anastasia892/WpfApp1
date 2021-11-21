@@ -20,7 +20,7 @@
                     <Border Padding="5" CornerRadius="5" BorderThickness="1" BorderBrush="LightPink">
                         <Grid Width="300" Height="200">
                             <StackPanel>
-                                <TextBlock Text="{Binding Бренд.Имя_бренда}" FontSize="18"/>
+                                <TextBlock Text="{Binding Бренд1.Имя_бренда}" FontSize="18"/>
                                 <TextBlock Loaded="TextBlock_Loaded" Uid="{Binding ID_Бренд}"  FontSize="14"/>
                             </StackPanel>
                         </Grid>

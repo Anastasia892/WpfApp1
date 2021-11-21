@@ -11,7 +11,7 @@
         <EntityTypeShape EntityType="Model.Пользователи" Width="1.5" PointX="8" PointY="7.875" />
         <EntityTypeShape EntityType="Model.Роли" Width="1.5" PointX="5.75" PointY="8.25" />
         <EntityTypeShape EntityType="Model.Страна" Width="1.5" PointX="3.75" PointY="0.75" />
-        <EntityTypeShape EntityType="Model.Тип_косметики" Width="1.5" PointX="3.75" PointY="7.125" />
+        <EntityTypeShape EntityType="Model.Тип_косметики" Width="2" PointX="3.75" PointY="7.125" />
         <AssociationConnector Association="Model.FK_Информация_о_косметике_Бренд" />
         <AssociationConnector Association="Model.FK_Класификация_Бренд" />
         <AssociationConnector Association="Model.FK_Информация_о_косметике_Страна" />

@@ -33,5 +33,10 @@ namespace WpfApp1
         {
             Frame2.Frame3.Navigate(new Klassif());
         }
+
+        private void Soz_zap_Click(object sender, RoutedEventArgs e)
+        {
+            Frame2.Frame3.Navigate(new Sozdanie());
+        }
     }
 }

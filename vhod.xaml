@@ -11,9 +11,9 @@
     <Grid>
         <StackPanel>
         <TextBlock Text="Введите логин:" HorizontalAlignment="Center" Margin="0,10,0,0"/>
-            <TextBox Name="BoxLogin2"  HorizontalAlignment="Center" Margin="0,10,0,0"  Height="20" Width="80"/>
+            <TextBox Name="BoxLogin2" Text="Admin"  HorizontalAlignment="Center" Margin="0,10,0,0"  Height="20" Width="80"/>
             <TextBlock Text="Введите пароль:" HorizontalAlignment="Center" Margin="0,10,0,0"/>
-            <PasswordBox Name="BoxParol2"  HorizontalAlignment="Center" Margin="0,10,0,0"  Height="20" Width="80"/>
+            <PasswordBox Name="BoxParol2" Password="Lolo141#"  HorizontalAlignment="Center" Margin="0,10,0,0"  Height="20" Width="80"/>
             <Button Name="vhod3" Content="Вход"  HorizontalAlignment="Center" Margin="0,10,0,0"  Height="20" Width="80" Click="vhod3_Click"/>
             <Button Name="nazad2" Content="Назад"  HorizontalAlignment="Center" Margin="0,10,0,0"  Height="20" Width="80" Click="nazad2_Click"/>
         </StackPanel>
