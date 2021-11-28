@@ -70,6 +70,9 @@
     </Compile>
     <Compile Include="Class1.cs" />
     <Compile Include="Frame2.cs" />
+    <Compile Include="kabinet.xaml.cs">
+      <DependentUpon>kabinet.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Karta.cs" />
     <Compile Include="Klassif.xaml.cs">
       <DependentUpon>Klassif.xaml</DependentUpon>
@@ -93,6 +96,9 @@
       <DependentUpon>nachalo.xaml</DependentUpon>
     </Compile>
     <Compile Include="ObchClass.cs" />
+    <Compile Include="Okno.xaml.cs">
+      <DependentUpon>Okno.xaml</DependentUpon>
+    </Compile>
     <Compile Include="reg.xaml.cs">
       <DependentUpon>reg.xaml</DependentUpon>
     </Compile>
@@ -133,7 +139,14 @@
     <Compile Include="Тип_косметики.cs">
       <DependentUpon>Model2.tt</DependentUpon>
     </Compile>
+    <Compile Include="Фото.cs">
+      <DependentUpon>Model2.tt</DependentUpon>
+    </Compile>
     <Page Include="Admin.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="kabinet.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -154,6 +167,10 @@
       <SubType>Code</SubType>
     </Compile>
     <Page Include="nachalo.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Okno.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

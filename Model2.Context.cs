@@ -32,5 +32,6 @@ namespace WpfApp1
         public virtual DbSet<Роли> Роли { get; set; }
         public virtual DbSet<Страна> Страна { get; set; }
         public virtual DbSet<Тип_косметики> Тип_косметики { get; set; }
+        public virtual DbSet<Фото> Фото { get; set; }
     }
 }

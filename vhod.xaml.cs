@@ -42,12 +42,12 @@ namespace WpfApp1
                 if (User.IDроли == 1)
                 {
                     MessageBox.Show("Добро пожаловать АДМИН " + User.Имя , "Авторизация");
-                    Frame2.Frame.Navigate(new Admin());
+                    Frame2.Frame.Navigate(new Admin(User));
                 }
                 else
                 {
                     MessageBox.Show("Здравствуйте, " + User.Имя , "Авторизация");
-                    Frame2.Frame.Navigate(new vhod_itog());
+                    Frame2.Frame.Navigate(new kabinet(User));
                 }
             }
             else

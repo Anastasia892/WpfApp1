@@ -12,16 +12,12 @@ namespace WpfApp1
     using System;
     using System.Collections.Generic;
     
-    public partial class Пользователи
+    public partial class Фото
     {
         public int ID { get; set; }
-        public string Имя { get; set; }
-        public string Фамилия { get; set; }
-        public string Логин { get; set; }
-        public int Пароль { get; set; }
-        public int IDроли { get; set; }
+        public string ПутьКФото { get; set; }
+        public byte[] БиФото { get; set; }
     
-        public virtual Роли Роли { get; set; }
-        public virtual Фото Фото { get; set; }
+        public virtual Пользователи Пользователи { get; set; }
     }
 }

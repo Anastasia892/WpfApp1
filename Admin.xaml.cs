@@ -8,10 +8,12 @@ namespace WpfApp1
     /// </summary>
     public partial class Admin : Page
     {
-        public Admin()
+        Пользователи Ад;
+        public Admin(Пользователи p)
         {
             InitializeComponent();
             Frame2.Frame3 = fr_katalog;
+            Ад = p;
         }
 
         private void spisok_Click(object sender, RoutedEventArgs e)
@@ -37,6 +39,11 @@ namespace WpfApp1
         private void Soz_zap_Click(object sender, RoutedEventArgs e)
         {
             Frame2.Frame3.Navigate(new Sozdanie());
+        }
+
+        private void b_kab_Click(object sender, RoutedEventArgs e)
+        {
+            Frame2.Frame.Navigate(new kabinet(Ад));
         }
     }
 }

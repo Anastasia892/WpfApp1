@@ -64,6 +64,14 @@
           <Property Name="ID_Тип_косметики" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="Тип_косметики" Type="varchar" MaxLength="50" />
         </EntityType>
+        <EntityType Name="Фото">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" Nullable="false" />
+          <Property Name="ПутьКФото" Type="nvarchar" MaxLength="100" />
+          <Property Name="БиФото" Type="varbinary(max)" />
+        </EntityType>
         <Association Name="FK_Информация_о_косметике_Бренд">
           <End Role="Бренд" Type="Self.Бренд" Multiplicity="0..1" />
           <End Role="Информация_о_косметике" Type="Self.Информация_о_косметике" Multiplicity="*" />
@@ -136,6 +144,18 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_Фото_Пользователи">
+          <End Role="Пользователи" Type="Self.Пользователи" Multiplicity="1" />
+          <End Role="Фото" Type="Self.Фото" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="Пользователи">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Фото">
+              <PropertyRef Name="ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <EntityContainer Name="Хранилище ModelContainer">
           <EntitySet Name="Бренд" EntityType="Self.Бренд" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Информация_о_косметике" EntityType="Self.Информация_о_косметике" Schema="dbo" store:Type="Tables" />
@@ -144,6 +164,7 @@
           <EntitySet Name="Роли" EntityType="Self.Роли" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Страна" EntityType="Self.Страна" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Тип_косметики" EntityType="Self.Тип_косметики" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Фото" EntityType="Self.Фото" Schema="dbo" store:Type="Tables" />
           <AssociationSet Name="FK_Информация_о_косметике_Бренд" Association="Self.FK_Информация_о_косметике_Бренд">
             <End Role="Бренд" EntitySet="Бренд" />
             <End Role="Информация_о_косметике" EntitySet="Информация_о_косметике" />
@@ -168,6 +189,10 @@
             <End Role="Роли" EntitySet="Роли" />
             <End Role="Пользователи" EntitySet="Пользователи" />
           </AssociationSet>
+          <AssociationSet Name="FK_Фото_Пользователи" Association="Self.FK_Фото_Пользователи">
+            <End Role="Пользователи" EntitySet="Пользователи" />
+            <End Role="Фото" EntitySet="Фото" />
+          </AssociationSet>
         </EntityContainer>
       </Schema></edmx:StorageModels>
     <!-- CSDL content -->
@@ -181,6 +206,7 @@
           <EntitySet Name="Роли" EntityType="Model.Роли" />
           <EntitySet Name="Страна" EntityType="Model.Страна" />
           <EntitySet Name="Тип_косметики" EntityType="Model.Тип_косметики" />
+          <EntitySet Name="Фото" EntityType="Model.Фото" />
           <AssociationSet Name="FK_Информация_о_косметике_Бренд" Association="Model.FK_Информация_о_косметике_Бренд">
             <End Role="Бренд" EntitySet="Бренд" />
             <End Role="Информация_о_косметике" EntitySet="Информация_о_косметике" />
@@ -204,6 +230,10 @@
           <AssociationSet Name="FK_Пользователи_Роли" Association="Model.FK_Пользователи_Роли">
             <End Role="Роли" EntitySet="Роли" />
             <End Role="Пользователи" EntitySet="Пользователи" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Фото_Пользователи" Association="Model.FK_Фото_Пользователи">
+            <End Role="Пользователи" EntitySet="Пользователи" />
+            <End Role="Фото" EntitySet="Фото" />
           </AssociationSet>
         </EntityContainer>
         <EntityType Name="Бренд">
@@ -251,6 +281,7 @@
           <Property Name="Пароль" Type="Int32" Nullable="false" />
           <Property Name="IDроли" Type="Int32" Nullable="false" />
           <NavigationProperty Name="Роли" Relationship="Model.FK_Пользователи_Роли" FromRole="Пользователи" ToRole="Роли" />
+          <NavigationProperty Name="Фото" Relationship="Model.FK_Фото_Пользователи" FromRole="Пользователи" ToRole="Фото" />
         </EntityType>
         <EntityType Name="Роли">
           <Key>
@@ -276,6 +307,15 @@
           <Property Name="Тип_косметики1" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <NavigationProperty Name="Информация_о_косметике" Relationship="Model.FK_Информация_о_косметике_Тип_косметики" FromRole="Тип_косметики" ToRole="Информация_о_косметике" />
           <NavigationProperty Name="Класификация" Relationship="Model.FK_Класификация_Тип_косметики" FromRole="Тип_косметики" ToRole="Класификация" />
+        </EntityType>
+        <EntityType Name="Фото">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" />
+          <Property Name="ПутьКФото" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="БиФото" Type="Binary" MaxLength="Max" FixedLength="false" />
+          <NavigationProperty Name="Пользователи" Relationship="Model.FK_Фото_Пользователи" FromRole="Фото" ToRole="Пользователи" />
         </EntityType>
         <Association Name="FK_Информация_о_косметике_Бренд">
           <End Type="Model.Бренд" Role="Бренд" Multiplicity="0..1" />
@@ -349,6 +389,18 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_Фото_Пользователи">
+          <End Type="Model.Пользователи" Role="Пользователи" Multiplicity="1" />
+          <End Type="Model.Фото" Role="Фото" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="Пользователи">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Фото">
+              <PropertyRef Name="ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -418,6 +470,15 @@
               <MappingFragment StoreEntitySet="Тип_косметики">
                 <ScalarProperty Name="Тип_косметики1" ColumnName="Тип_косметики" />
                 <ScalarProperty Name="ID_Тип_косметики" ColumnName="ID_Тип_косметики" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Фото">
+            <EntityTypeMapping TypeName="Model.Фото">
+              <MappingFragment StoreEntitySet="Фото">
+                <ScalarProperty Name="БиФото" ColumnName="БиФото" />
+                <ScalarProperty Name="ПутьКФото" ColumnName="ПутьКФото" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
