@@ -20,6 +20,9 @@
             <PasswordBox Name="BoxParol"  HorizontalAlignment="Center" Margin="0,10,0,0"  Height="20" Width="80" />
             <Button Name="vhod2" Content="Вход"  HorizontalAlignment="Center" Margin="0,10,0,0"  Height="20" Width="80" Click="vhod2_Click"/>
             <Button Name="nazad" Content="Назад"  HorizontalAlignment="Center" Margin="0,10,0,0"  Height="20" Width="80" Click="nazad_Click" />
-            </StackPanel>
+            <Button Name="reklama" Content="Важно!"  HorizontalAlignment="Center" Margin="0,10,0,0"  Height="35
+                    " Width="100" Click="nazad_Click" FontSize="20" Background="MediumOrchid" Foreground="YellowGreen"  BorderBrush="YellowGreen"  />
+
+        </StackPanel>
     </Grid>
 </Page>

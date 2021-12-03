@@ -111,6 +111,9 @@
     <Compile Include="Str2.xaml.cs">
       <DependentUpon>Str2.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Str_reklama.xaml.cs">
+      <DependentUpon>Str_reklama.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Svoi.cs" />
     <Compile Include="vhod.xaml.cs">
       <DependentUpon>vhod.xaml</DependentUpon>
@@ -190,6 +193,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Str_reklama.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="vhod.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -251,6 +258,7 @@
       <DependentUpon>Model2.edmx</DependentUpon>
       <LastGenOutput>Model2.cs</LastGenOutput>
     </Content>
+    <Resource Include="Resources\кот.jpg" />
     <Resource Include="Resources\помада.jpg" />
     <Resource Include="Resources\заглушка.png" />
   </ItemGroup>
