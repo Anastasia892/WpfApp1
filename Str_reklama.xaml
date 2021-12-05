@@ -12,9 +12,10 @@
         <StackPanel>
             <TextBlock Text="  &#x1f496;Обратите внимание!" Background="YellowGreen" Foreground="MediumOrchid" HorizontalAlignment ="Center" FontSize="20" FontFamily="Segoe UI Symbols" Margin="24,0,10,0" Width="266" />
             <TextBlock Text="Самая обычная реклама&#x1f496;" FontFamily="Segoe UI Symbols"  Background="YellowGreen" Foreground="MediumOrchid" HorizontalAlignment ="Center" FontSize="20"/>
-            <TextBlock Text="Проект существует тут, просто кликни здесь!"  Background="YellowGreen" Foreground="MediumOrchid"  HorizontalAlignment ="Center"  />
-            <Image Source="Resources/кот.jpg" Width ="200" Height="200"/>
-            <Button Content="Смотреть"  Background="MediumOrchid" Foreground="YellowGreen" Width="100" Click="Button_Click" />
+            <TextBlock Name="Str1" Text="Проект существует тут, просто кликни здесь!"  Background="YellowGreen" Foreground="MediumOrchid"  HorizontalAlignment ="Center"  />
+            <Image Name="Cat" Source="Resources/кот.jpg" Width ="200" Height="200"/>
+            <Image Name="Skr" Source="Resources/скрин.png" Width ="200" Height="200" Visibility="Collapsed"/>
+            <Button Name="Smotret" Content="Смотреть"  Background="MediumOrchid" Foreground="YellowGreen" Width="100" Click="Smotret_Click" />
         </StackPanel>
     </Grid>
 </Page>

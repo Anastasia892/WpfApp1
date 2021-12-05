@@ -258,6 +258,7 @@
       <DependentUpon>Model2.edmx</DependentUpon>
       <LastGenOutput>Model2.cs</LastGenOutput>
     </Content>
+    <Resource Include="Resources\скрин.png" />
     <Resource Include="Resources\кот.jpg" />
     <Resource Include="Resources\помада.jpg" />
     <Resource Include="Resources\заглушка.png" />

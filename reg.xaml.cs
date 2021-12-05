@@ -55,7 +55,12 @@ namespace WpfApp1
 
         private void nazad_Click(object sender, RoutedEventArgs e)
         {
+            Frame2.Frame.Navigate(new nachalo());
+        }
 
+        private void reklama_Click(object sender, RoutedEventArgs e)
+        {
+            Frame2.Frame.Navigate(new Str_reklama());
         }
     }
 }

@@ -15,6 +15,21 @@
                     <WrapPanel HorizontalAlignment="Center"></WrapPanel>
                 </ItemsPanelTemplate>
             </ListView.ItemsPanel>
+            <StackPanel>
+                <ComboBox Name="Brend" SelectionChanged="Brend_SelectionChanged"/>
+                <DatePicker SelectedDateChanged="DatePicker_SelectedDateChanged"/>
+                <ComboBox Name="Strana" SelectionChanged="Strana_SelectionChanged"/>
+                <TextBlock Name="Text" Text="Показано записей: "/>
+                <RadioButton Name="SrtBreand"/>
+                <RadioButton Name="StrStrana"/>
+                <RadioButton Name="StrData"/>
+                <Button Name="SortUb" Content="По убывнию"/>
+                <Button Name="SortVz" Content="По возрастанию"/>
+                
+                
+
+
+            </StackPanel>
             <ListView.ItemTemplate>
                 <DataTemplate>
                     <Border Padding="5" CornerRadius="5" BorderThickness="1" BorderBrush="LightPink">
