@@ -18,8 +18,8 @@
             <PropertyRef Name="ID_Косметики" />
           </Key>
           <Property Name="ID_Косметики" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="Бренд" Type="int" />
-          <Property Name="Страна_изготовления" Type="int" />
+          <Property Name="Бренд" Type="int" Nullable="false" />
+          <Property Name="Страна_изготовления" Type="int" Nullable="false" />
           <Property Name="Дата_изготовления" Type="date" Nullable="false" />
           <Property Name="Фото" Type="nchar" MaxLength="20" />
           <Property Name="ID_Тип_косметики" Type="int" Nullable="false" />
@@ -73,7 +73,7 @@
           <Property Name="БиФото" Type="varbinary(max)" />
         </EntityType>
         <Association Name="FK_Информация_о_косметике_Бренд">
-          <End Role="Бренд" Type="Self.Бренд" Multiplicity="0..1" />
+          <End Role="Бренд" Type="Self.Бренд" Multiplicity="1" />
           <End Role="Информация_о_косметике" Type="Self.Информация_о_косметике" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Бренд">
@@ -85,7 +85,7 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_Информация_о_косметике_Страна">
-          <End Role="Страна" Type="Self.Страна" Multiplicity="0..1" />
+          <End Role="Страна" Type="Self.Страна" Multiplicity="1" />
           <End Role="Информация_о_косметике" Type="Self.Информация_о_косметике" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Страна">
@@ -251,8 +251,8 @@
             <PropertyRef Name="ID_Косметики" />
           </Key>
           <Property Name="ID_Косметики" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Бренд" Type="Int32" />
-          <Property Name="Страна_изготовления" Type="Int32" />
+          <Property Name="Бренд" Type="Int32" Nullable="false" />
+          <Property Name="Страна_изготовления" Type="Int32" Nullable="false" />
           <Property Name="Дата_изготовления" Type="DateTime" Nullable="false" Precision="0" />
           <Property Name="Фото" Type="String" MaxLength="20" FixedLength="true" Unicode="true" />
           <Property Name="ID_Тип_косметики" Type="Int32" Nullable="false" />
@@ -318,7 +318,7 @@
           <NavigationProperty Name="Пользователи" Relationship="Model.FK_Фото_Пользователи" FromRole="Фото" ToRole="Пользователи" />
         </EntityType>
         <Association Name="FK_Информация_о_косметике_Бренд">
-          <End Type="Model.Бренд" Role="Бренд" Multiplicity="0..1" />
+          <End Type="Model.Бренд" Role="Бренд" Multiplicity="1" />
           <End Type="Model.Информация_о_косметике" Role="Информация_о_косметике" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Бренд">
@@ -342,7 +342,7 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_Информация_о_косметике_Страна">
-          <End Type="Model.Страна" Role="Страна" Multiplicity="0..1" />
+          <End Type="Model.Страна" Role="Страна" Multiplicity="1" />
           <End Type="Model.Информация_о_косметике" Role="Информация_о_косметике" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Страна">

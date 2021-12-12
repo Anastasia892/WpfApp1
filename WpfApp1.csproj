@@ -99,6 +99,7 @@
     <Compile Include="Okno.xaml.cs">
       <DependentUpon>Okno.xaml</DependentUpon>
     </Compile>
+    <Compile Include="PageChange.cs" />
     <Compile Include="reg.xaml.cs">
       <DependentUpon>reg.xaml</DependentUpon>
     </Compile>

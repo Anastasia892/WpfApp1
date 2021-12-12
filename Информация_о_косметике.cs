@@ -15,8 +15,8 @@ namespace WpfApp1
     public partial class Информация_о_косметике
     {
         public int ID_Косметики { get; set; }
-        public Nullable<int> Бренд { get; set; }
-        public Nullable<int> Страна_изготовления { get; set; }
+        public int Бренд { get; set; }
+        public int Страна_изготовления { get; set; }
         public System.DateTime Дата_изготовления { get; set; }
         public string Фото { get; set; }
         public int ID_Тип_косметики { get; set; }

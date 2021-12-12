@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Input;
 
 namespace WpfApp1
 {
@@ -25,17 +26,7 @@ namespace WpfApp1
             }
             Brend.SelectedIndex = 0;
             Text.Text = "Найдено записей" + infStart.Count + " ";
-
-
-            Strana.Items.Add("Все страны");
-            List<Страна> Stranas = ObchClass.base1.Страна.ToList();
-            for (int i = 0; i < Stranas.Count; i++)
-            {
-                Strana.Items.Add(Stranas[i].Страна_изготовления);
-            }
-            Strana.SelectedIndex = 0;
-            Text.Text = "Найдено записей" + infStart.Count + " ";
-
+            DataContext = pc;
         }
 
         private void redaktura_Click(object sender, RoutedEventArgs e)
@@ -68,15 +59,20 @@ namespace WpfApp1
             {
                 infFilter = infStart;  // если ни один из эл-тов Combobox не выбран (по умолчанию в этом случае будут все записи)
             }
-            int indexST = Strana.SelectedIndex;
-            if (indexST != 0) // определения выбранного элемента из Combobox
+            if (CBT.IsChecked == true)
             {
-                infFilter = infStart.Where(x => x.Страна_изготовления == indexST).ToList();
+                infFilter = infFilter.Where(x => x.ID_Тип_косметики == 2).ToList();
             }
-            else
+            if (CBP.IsChecked == true)
             {
-                infFilter = infStart;  // если ни один из эл-тов Combobox не выбран (по умолчанию в этом случае будут все записи)
+                infFilter = infFilter.Where(x => x.ID_Тип_косметики == 1).ToList();
             }
+            if (!string.IsNullOrWhiteSpace(Kalen.SelectedDate.ToString()))
+            {
+                infFilter = infFilter.Where(x => x.Дата_изготовления == Kalen.SelectedDate).ToList();
+            }
+            List.ItemsSource = infFilter;
+            Text.Text = "Найдено записей" + infFilter.Count + " ";
         }
 
 
@@ -86,14 +82,99 @@ namespace WpfApp1
             Filter();
         }
 
-        private void Strana_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-            Filter();
-        }
+
 
         private void DatePicker_SelectedDateChanged(object sender, SelectionChangedEventArgs e)
         {
             Filter();
+        }
+
+        private void CBT_Checked(object sender, RoutedEventArgs e)
+        {
+            Filter();
+        }
+
+        private void CBP_Checked(object sender, RoutedEventArgs e)
+        {
+            Filter();
+        }
+
+        private void CBT_Unchecked(object sender, RoutedEventArgs e)
+        {
+            Filter();
+        }
+
+        private void CBP_Unchecked(object sender, RoutedEventArgs e)
+        {
+            Filter();
+        }
+
+        private void SortVz_Click(object sender, RoutedEventArgs e)
+        {
+            if (SrtBreand.IsChecked == true)
+            {
+                infFilter.Sort((x, y) => x.Бренд.CompareTo(y.Бренд));
+            }
+            if (StrData.IsChecked == true)
+            {
+                infFilter.Sort((x, y) => x.Дата_изготовления.CompareTo(y.Дата_изготовления));
+            }
+            if (StrStrana.IsChecked == true)
+            {
+                infFilter.Sort((x, y) => x.Страна_изготовления.CompareTo(y.Страна_изготовления));
+            }
+            List.Items.Refresh();
+        }
+
+        private void SortUb_Click(object sender, RoutedEventArgs e)
+        {
+            if (SrtBreand.IsChecked == true)
+            {
+                infFilter.Sort((x, y) => x.Бренд.CompareTo(y.Бренд));
+            }
+            if (StrData.IsChecked == true)
+            {
+                infFilter.Sort((x, y) => x.Дата_изготовления.CompareTo(y.Дата_изготовления));
+            }
+            if (StrStrana.IsChecked == true)
+            {
+                infFilter.Sort((x, y) => x.Страна_изготовления.CompareTo(y.Страна_изготовления));
+
+            }
+            infFilter.Reverse();
+            List.Items.Refresh();
+        }
+        PageChange pc = new PageChange();
+        private void GoPage_MouseDown(object sender, MouseButtonEventArgs e)
+        {
+            TextBlock tb = (TextBlock)sender;
+            switch (tb.Uid)
+            {
+                case "prev":
+                    pc.CurrentPage--;
+                    break;
+                case "next":
+                    pc.CurrentPage++;
+                    break;
+                default:
+                    pc.CurrentPage = Convert.ToInt32(tb.Text);
+                    break;
+            }
+
+            List.ItemsSource = infFilter.Skip(pc.CurrentPage * pc.CountPage - pc.CountPage).Take(pc.CountPage).ToList();
+        }
+        private void txtPageCount_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            try
+            {
+                pc.CountPage = Convert.ToInt32(txtPageCount.Text);
+            }
+            catch
+            {
+                pc.CountPage = infFilter.Count;
+            }
+            pc.Countlist = infFilter.Count;
+            List.ItemsSource = infFilter.Skip(0).Take(pc.CountPage).ToList();
         }
     }
 }
